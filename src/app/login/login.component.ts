@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 import { AppComponent } from '../app.component';
 // REST API
@@ -25,6 +27,7 @@ export class LoginComponent {
     nameR: string;
     passwordR1: string;
     passwordR2: string;
+    matcher = new SamePasswordErrorStateMatcher();
 
     constructor(private api: s.AuthenticationService,
         private usersApi: s.UsersService,
@@ -58,4 +61,10 @@ export class LoginComponent {
         );
     }
 
+}
+
+export class SamePasswordErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    return form ? form.value.password !== form.value.passwordConfirmation : false;
+  }
 }
