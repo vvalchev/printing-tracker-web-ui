@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Редактиране на адрес</h1>
+
+<div mat-dialog-content>
+    <mat-card class="editor-container">
+        <mat-card-subtitle>Адрес</mat-card-subtitle>
+
+        <mat-form-field>
+            <input matInput placeholder="Страна" [(ngModel)]="data.item.country" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Област" [(ngModel)]="data.item.region" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Град" [(ngModel)]="data.item.city" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Пощ. код" [(ngModel)]="data.item.postalCode" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Улица" [(ngModel)]="data.item.streetAddress" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Номер" [(ngModel)]="data.item.streetNumber" required>
+        </mat-form-field>
+        <br/>
+        <mat-form-field style="width: 100%">
+            <textarea matInput placeholder="Бележки" [(ngModel)]="data.item.notes"></textarea>
+        </mat-form-field>
+    </mat-card>
+
+    <mat-card class="editor-container">
+        <mat-card-subtitle>Контакти</mat-card-subtitle>
+
+        <mat-form-field>
+            <input matInput placeholder="Име" [(ngModel)]="data.item.contactName">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="E-Mail" [(ngModel)]="data.item.email">
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+            <input matInput placeholder="Тел. номер" [(ngModel)]="data.item.phoneNumberPrimary">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Мобилен номер" [(ngModel)]="data.item.phoneNumberSecondary">
+        </mat-form-field>
+    </mat-card>
+
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Отказ</button>
+    <button mat-button [mat-dialog-close]="this.data">Запис</button>
+</div>

@@ -1,0 +1,42 @@
+<mat-card class="card-container">
+    <mat-card-title>
+        Отчети на принтер <button mat-button [routerLink]="['/printers']">{{ deviceSerialNumber }}</button>
+        <button mat-mini-fab (click)="add()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-card-title>
+
+    <mat-card-content>
+
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Филтър">
+        </mat-form-field>
+
+        <mat-table [dataSource]="items" matSort>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+            <ng-container matColumnDef="date">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Дата</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.date | date }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="invoiced">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Фактуриран</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.invoiced}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="monoCounter">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Брояч</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.monoCounter}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="colorCounter">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Брояч/цветно</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.colorCounter}} </mat-cell>
+            </ng-container>
+
+        </mat-table>
+
+    </mat-card-content>
+</mat-card>

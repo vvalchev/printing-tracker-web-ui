@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Редактиране на данни за клиент</h1>
+
+<div mat-dialog-content>
+    <mat-card class="editor-container">
+        <mat-card-subtitle>Данни за клиента</mat-card-subtitle>
+
+        <mat-form-field *ngIf="data.create">
+            <input matInput placeholder="Булстат" [(ngModel)]="data.item.uic" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Име" [(ngModel)]="data.item.displayName" required>
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput placeholder="Бележки" [(ngModel)]="data.item.notes"></textarea>
+        </mat-form-field>
+    </mat-card>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Отказ</button>
+    <button mat-button [mat-dialog-close]="this.data">Запис</button>
+    <button mat-button [mat-dialog-close]="false" [routerLink]="['/addresses',data.item.uic]">Адреси</button>
+</div>

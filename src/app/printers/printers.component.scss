@@ -1,0 +1,11 @@
+.do {
+    min-width: 180px
+}
+.editor-container {
+  display: flex;
+  flex-direction: column;
+}
+.editor-container > * {
+  width: 100%;
+  margin: auto;
+}

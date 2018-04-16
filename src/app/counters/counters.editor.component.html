@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Добавяне на отчет</h1>
+
+<div mat-dialog-content>
+    <mat-card class="editor-container">
+        <mat-card-subtitle>Данни</mat-card-subtitle>
+
+        <mat-form-field>
+            <input matInput placeholder="Брояч (моно)" [(ngModel)]="data.monoCounter" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Брояч (цветно)" [(ngModel)]="data.colorCounter">
+        </mat-form-field>
+    </mat-card>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Отказ</button>
+    <button mat-button [mat-dialog-close]="this.data">Запис</button>
+</div>

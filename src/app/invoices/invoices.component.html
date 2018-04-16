@@ -1,0 +1,73 @@
+<mat-card class="card-container">
+    <mat-card-title>
+        Фактури на принтер <button mat-button [routerLink]="['/printers']">{{ deviceSerialNumber }}</button>
+    </mat-card-title>
+
+    <mat-card-content>
+
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Филтър">
+        </mat-form-field>
+
+        <mat-table [dataSource]="items" matSort matSortActive="created" matSortDisableClear matSortDirection="asc">
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+            <ng-container matColumnDef="date">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Дата</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="totalPrice">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Обща Цена</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.totalPrice}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="paid">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Платено</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.paid}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="lastInvoicedMonoCounter">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Предишен брояч</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.lastInvoicedMonoCounter}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="monoCounterForInvoiceing">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Нов брояч</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.monoCounterForInvoiceing}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="priceMono">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Цена</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.priceMono}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="lastInvoicedColorCounter">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Предишен брояч/цветно</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.lastInvoicedColorCounter}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="colorCounterForInvoiceing">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Нов брояч/цветно</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.colorCounterForInvoiceing}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="priceColor">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Цена/цветно</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.priceColor}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="do">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Действия</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-icon-button color="primary" (click)="markAsPaid(element)">
+                        <mat-icon>check_circle</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+        </mat-table>
+
+    </mat-card-content>
+</mat-card>

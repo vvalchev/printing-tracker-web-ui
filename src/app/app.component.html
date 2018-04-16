@@ -1,0 +1,61 @@
+<mat-sidenav-container class="demo-root" fullscreen>
+    <div>
+        <mat-toolbar color="primary">
+            <button mat-icon-button>
+                <mat-icon>menu</mat-icon>
+            </button>
+            <div class="demo-toolbar">
+                <h1>
+                    <button mat-button
+                        routerLinkActive="mat-raised-button mat-accent"
+                        [routerLink]="['/printers']">
+                        Принтери
+                    </button>
+                    <button mat-button *ngIf="isAdmin()"
+                        routerLinkActive="mat-raised-button mat-accent"
+                        [routerLink]="['/customers']">
+                        Клиенти
+                    </button>
+                    <button mat-button *ngIf="isAdmin()"
+                        routerLinkActive="mat-raised-button mat-accent"
+                        [routerLink]="['/prices']">
+                        Цени
+                    </button>
+                    <button mat-button *ngIf="isAdmin()"
+                        routerLinkActive="mat-raised-button mat-accent"
+                        [routerLink]="['/users']">
+                        Потребители
+                    </button>
+                </h1>
+
+                <div>
+                    <!-- меню за изход и смяна на паролата -->
+                    <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="token">
+                         {{ token.sub }}
+                         <mat-icon>power_settings_new</mat-icon>
+                    </button>
+                    <mat-menu #userMenu>
+                      <button mat-menu-item (click)="logout()">
+                          <mat-icon>exit_to_app</mat-icon>
+                          <span>Изход</span>
+                      </button>
+                      <button mat-menu-item (click)="changePassword()">
+                          <mat-icon>mode_edit</mat-icon>
+                          <span>Смяна на паролата</span>
+                      </button>
+                    </mat-menu>
+                    <!-- вход в системата (ако вече не сме влезли) -->
+                    <button mat-icon-button (click)="login()" *ngIf="!token">
+                        <mat-icon>person</mat-icon>
+                    </button>
+                    <!-- смяна на темата -->
+                    <button mat-icon-button (click)="toggleTheme()">
+                        <mat-icon>format_color_fill</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </mat-toolbar>
+
+        <router-outlet></router-outlet>
+    </div>
+</mat-sidenav-container>

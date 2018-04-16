@@ -1,0 +1,52 @@
+<mat-tab-group>
+    <mat-tab label="Вход">
+        <mat-card class="card-container">
+            <mat-card-content class="login-container">
+                <mat-form-field>
+                    <input matInput placeholder="Въведете Вашето потребителско име" [(ngModel)]="username" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Въведете Вашата парола" [(ngModel)]="password" required [type]="hide ? 'password' : 'text'">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                </mat-form-field>
+                <mat-checkbox [(ngModel)]="rememberMe">
+                    Запомни ме
+                </mat-checkbox>
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+                <button mat-raised-button color="primary" (click)="login()">
+                    <mat-icon>person</mat-icon>Вход
+                </button>
+            </mat-card-actions>
+        </mat-card>
+
+    </mat-tab>
+
+    <mat-tab label="Регистрация">
+        <mat-card class="card-container">
+            <mat-card-content class="login-container">
+                <mat-form-field>
+                    <input matInput placeholder="Потребителско Име" [(ngModel)]="usernameR" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Вашето Име" [(ngModel)]="nameR" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Парола" [(ngModel)]="passwordR1" [type]="hide1 ? 'password' : 'text'" required>
+                    <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility' : 'visibility_off'}}</mat-icon>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Потвърждение" [(ngModel)]="passwordR2" [type]="hide2 ? 'password' : 'text'" required>
+                    <mat-icon matSuffix (click)="hide2 = !hide2">{{hide2 ? 'visibility' : 'visibility_off'}}</mat-icon>
+                </mat-form-field>
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+                <button mat-raised-button color="primary" (click)="register()">
+                    <mat-icon>person</mat-icon>Регистрация
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>
+</mat-tab-group>

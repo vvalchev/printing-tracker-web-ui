@@ -1,0 +1,78 @@
+<mat-card class="card-container">
+    <mat-card-title>
+        Принтери
+        <button mat-mini-fab (click)="edit(null)">
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-card-title>
+
+    <mat-card-content>
+
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Филтър">
+        </mat-form-field>
+
+        <mat-table [dataSource]="items" matSort matSortActive="created" matSortDisableClear matSortDirection="asc">
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+            <ng-container matColumnDef="serialNumber">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Сериен Номер </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.serialNumber}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="brand">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Марка </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.brand}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="model">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Модел </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.model}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dateInstalled">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Дата на инсталация </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.dateInstalled | date}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="customerUic">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Клиент </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-button [routerLink]="['/customers',element.customerUic]">
+                        {{element.customerUic}}
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="pricePackageId">
+                <mat-header-cell *matHeaderCellDef> Ценови Пакет </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-button [routerLink]="['/prices',element.pricePackageId]">
+                        {{element.pricePackageId}}
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="do">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="do">Действия</mat-header-cell>
+                <mat-cell *matCellDef="let element" class="do">
+                    <button mat-icon-button color="primary" (click)="edit(element)">
+                        <mat-icon>create</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="delete(element)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button mat-icon-button [routerLink]="['/invoices',element.serialNumber]">
+                        <mat-icon>payment</mat-icon>
+                    </button>
+                    <button mat-icon-button [routerLink]="['/counters',element.serialNumber]">
+                        <mat-icon>format_list_numbered</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+        </mat-table>
+
+    </mat-card-content>
+</mat-card>

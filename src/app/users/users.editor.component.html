@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Редактиране на данни за потребител</h1>
+
+<div mat-dialog-content>
+    <mat-card class="editor-container">
+        <mat-card-subtitle>Данни за потребителя</mat-card-subtitle>
+
+        <mat-form-field>
+            <input matInput placeholder="Потребител" [(ngModel)]="data.item.username" required disabled>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Име" [(ngModel)]="data.item.displayName" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Клиент" [(ngModel)]="data.item.customerUic">
+                <mat-option *ngFor="let c of customers | async" [value]="c.uic">
+                    {{ c.displayName }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <!-- <mat-form-field>
+            <input matInput placeholder="Роли" [(ngModel)]="data.item.roles"></textarea>
+        </mat-form-field> -->
+        <mat-form-field>
+            <textarea matInput placeholder="Бележки" [(ngModel)]="data.item.notes"></textarea>
+        </mat-form-field>
+    </mat-card>
+
+    <mat-card class="editor-container">
+        <mat-card-subtitle>Смяна на парола</mat-card-subtitle>
+        <mat-form-field>
+            <input matInput placeholder="Парола" [(ngModel)]="data.item.password" [type]="hide1 ? 'password' : 'text'">
+            <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Потвърждение" [(ngModel)]="data.item.passwordConfirmation" [type]="hide2 ? 'password' : 'text'">
+            <mat-icon matSuffix (click)="hide2 = !hide2">{{hide2 ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+    </mat-card>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Отказ</button>
+    <button mat-button [mat-dialog-close]="this.data">Запис</button>
+</div>

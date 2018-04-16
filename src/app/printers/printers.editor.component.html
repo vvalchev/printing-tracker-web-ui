@@ -1,0 +1,61 @@
+<h1 mat-dialog-title>Редактиране на принтер</h1>
+
+<div mat-dialog-content>
+    <mat-card class="editor-container">
+        <mat-card-subtitle>Данни за принтер</mat-card-subtitle>
+
+        <mat-form-field *ngIf="data.create">
+            <input matInput placeholder="Сериен номер" [(ngModel)]="data.item.serialNumber" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Марка" [(ngModel)]="data.item.brand">
+                <mat-option value="KONICA_MINOLTA">Konica-Minolta</mat-option>
+                <mat-option value="HP">HP</mat-option>
+                <mat-option value="LEXMARK">Lexmark</mat-option>
+                <mat-option value="BROTHER">Brother</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Модел" [(ngModel)]="data.item.model" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Клиент" [(ngModel)]="data.item.customerUic" (selectionChange)="onClientSelect($event)">
+                <mat-option *ngFor="let c of customers | async" [value]="c.uic">
+                    {{ c.displayName }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Адрес" [(ngModel)]="data.item.addressId">
+                <mat-option *ngFor="let c of addresses | async" [value]="c.addressId">
+                    {{ c.streetAddress }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Ценови пакет" [(ngModel)]="data.item.pricePackageId">
+                <mat-option *ngFor="let c of prices | async" [value]="c.pricePackageId">
+                    Моно {{ c.priceMonoPackage }} / Цветно {{ c.priceColorPackage || 0 }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </mat-card>
+
+    <mat-card class="editor-container">
+        <mat-card-subtitle>Първоначален отчет</mat-card-subtitle>
+
+        <mat-form-field>
+            <input matInput placeholder="Брояч/моно" [(ngModel)]="data.item.monoCounterInstalled" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Брояч/цветно" [(ngModel)]="data.item.colorCounterInstalled" required>
+        </mat-form-field>
+    </mat-card>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Отказ</button>
+    <button mat-button [mat-dialog-close]="this.data">Запис</button>
+</div>

@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Редактиране на ценови пакет</h1>
+
+<div mat-dialog-content>
+
+    <mat-card>
+        <mat-card-subtitle>Моно пакет</mat-card-subtitle>
+
+        <mat-form-field>
+            <input matInput placeholder="Брой станици/моно" [(ngModel)]="data.item.numbersMonoInPackage" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Цена/моно" [(ngModel)]="data.item.priceMonoPackage" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Цена извън пакета/моно" [(ngModel)]="data.item.priceMonoCopyOverPackage" required>
+        </mat-form-field>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-subtitle>Цветен пакет</mat-card-subtitle>
+
+        <mat-form-field>
+            <input matInput placeholder="Брой станици/цветно" [(ngModel)]="data.item.numbersColorInPackage">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Цена/цветно" [(ngModel)]="data.item.priceColorPackage">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Цена извън пакета/цветно" [(ngModel)]="data.item.priceColorCopyOverPackage">
+        </mat-form-field>
+    </mat-card>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Отказ</button>
+    <button mat-button [mat-dialog-close]="this.data">Запис</button>
+</div>
