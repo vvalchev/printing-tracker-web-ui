@@ -15,12 +15,14 @@
 
             <ng-container matColumnDef="date">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Дата</mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+                <mat-cell *matCellDef="let element"> {{element.date | date}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="totalPrice">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Обща Цена</mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.totalPrice}} </mat-cell>
+                <mat-cell *matCellDef="let element">
+                    <label class="mat-button mat-accent">{{element.totalPrice}}</label>
+                </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="paid">
