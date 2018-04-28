@@ -48,3 +48,12 @@ $candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
       width: 100%;
     }
 }
+
+.demo-root * {
+    opacity: 0.95;
+}
+.demo-root {
+    background-image: url("https://source.unsplash.com/random/1024x768");
+    background-size: 130%;
+    background-attachment: fixed;
+}
