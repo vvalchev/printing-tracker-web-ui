@@ -66,7 +66,7 @@ export class UsersComponent {
             if (result) {
                 this.api.updateUser(result.item.userId, result.item).subscribe(
                     res => this.ngOnInit(), // презареждане на таблицата
-                    err => this.snackBar.open(`Грешка при обновяване на данните за потребител "${item.username}"!`)
+                    err => this.err(`Грешка при обновяване на данните за потребител "${item.username}"!`)
                 );
             }
         });
@@ -81,9 +81,16 @@ export class UsersComponent {
             if (result) {
                 this.api.deleteUser(item.userId).subscribe(
                     res => this.ngOnInit(), // презареждане на таблицата
-                    err => this.snackBar.open(`Грешка при изтриване на потребител ${item.username}!`)
+                    err => this.err(`Грешка при изтриване на потребител ${item.username}!`)
                 )
             }
+        });
+    }
+
+
+    private err(message: string) {
+        this.snackBar.open(message, '', {
+            duration: 3000
         });
     }
 }

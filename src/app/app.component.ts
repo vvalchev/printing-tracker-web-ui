@@ -52,21 +52,21 @@ export class AppComponent {
 
     private setTheme() {
         // remove all theme classes
-        for (let i =0; i<MAX_THEMES; i++) {
-            this._element.nativeElement.classList.remove('theme-'+i);
-            this._overlayContainer.getContainerElement().classList.remove('theme-'+i);
+        for (let i = 0; i < MAX_THEMES; i++) {
+            this._element.nativeElement.classList.remove('theme-' + i);
+            this._overlayContainer.getContainerElement().classList.remove('theme-' + i);
         }
         // add the selected theme class
         if (this.theme != 0) {
-            this._element.nativeElement.classList.add('theme-'+this.theme);
-            this._overlayContainer.getContainerElement().classList.add('theme-'+this.theme);
+            this._element.nativeElement.classList.add('theme-' + this.theme);
+            this._overlayContainer.getContainerElement().classList.add('theme-' + this.theme);
         }
     }
 
     isAdmin(): boolean {
         return true;
 
-//FIXME: return this.token && this.token.auth === 'ROLE_ADMIN';
+        //FIXME: return this.token && this.token.auth === 'ROLE_ADMIN';
     }
 
     login() {
@@ -80,7 +80,7 @@ export class AppComponent {
 
     changePassword() {
         // FIXME:
-        this.snackBar.open('Тази функция все още не е достъпна!');
+        this.snackBar.open('Тази функция все още не е достъпна!', '', { duration: 3000 });
     }
 
     private clearToken() {

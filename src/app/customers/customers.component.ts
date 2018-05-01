@@ -48,7 +48,7 @@ export class CustomersComponent {
     autoEdit() {
         this.route.params.subscribe(params => {
             let uic = params['uic'];
-            let item = this.items.data.find( e => e.uic == uic);
+            let item = this.items.data.find(e => e.uic == uic);
             if (item) {
                 this.edit(item);
             }
@@ -78,12 +78,12 @@ export class CustomersComponent {
                 if (result.create) {
                     this.api.createCustomer(result.item).subscribe(
                         res => this.ngOnInit(), // презареждане на таблицата
-                        err => this.snackBar.open(`Грешка при създаване на нов клиент!`)
+                        err => this.err(`Грешка при създаване на нов клиент!`)
                     );
                 } else {
                     this.api.updateCustomer(result.item.uic, result.item).subscribe(
                         res => this.ngOnInit(), // презареждане на таблицата
-                        err => this.snackBar.open(`Грешка при обновяване на клиент "${item.displayName}"!`)
+                        err => this.err(`Грешка при обновяване на клиент "${item.displayName}"!`)
                     );
                 }
             }
@@ -99,9 +99,15 @@ export class CustomersComponent {
             if (result) {
                 this.api.deleteCustomer(item.uic).subscribe(
                     res => this.ngOnInit(), // презареждане на таблицата
-                    err => this.snackBar.open(`Грешка при изтриване на клиент "${item.displayName}"!`)
+                    err => this.err(`Грешка при изтриване на клиент "${item.displayName}"!`)
                 );
             }
+        });
+    }
+
+    private err(message: string) {
+        this.snackBar.open(message, '', {
+            duration: 3000
         });
     }
 }

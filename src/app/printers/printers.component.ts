@@ -64,12 +64,12 @@ export class PrintersComponent {
                     result.item.dateInstalled = new Date();
                     this.api.createPrintingDevice(result.item).subscribe(
                         res => this.ngOnInit(), // презареждане на таблицата
-                        err => this.snackBar.open(`Грешка при създаване на нов принтер!`)
+                        err => this.err(`Грешка при създаване на нов принтер!`)
                     );
                 } else {
                     this.api.updatePrintingDevice(result.item.serialNumber, result.item).subscribe(
                         res => this.ngOnInit(), // презареждане на таблицата
-                        err => this.snackBar.open(`Грешка при обновяване на принтер "${item.serialNumber}"!`)
+                        err => this.err(`Грешка при обновяване на принтер "${item.serialNumber}"!`)
                     );
                 }
             }
@@ -85,9 +85,16 @@ export class PrintersComponent {
             if (result) {
                 this.api.deletePrintingDevice(item.serialNumber).subscribe(
                     res => this.ngOnInit(), // презареждане на таблицата
-                    err => this.snackBar.open(`Грешка при изтриване на принтер "${item.serialNumber}"!`)
+                    err => this.err(`Грешка при изтриване на принтер "${item.serialNumber}"!`)
                 );
             }
+        });
+    }
+
+
+    private err(message: string) {
+        this.snackBar.open(message, '', {
+            duration: 3000
         });
     }
 }

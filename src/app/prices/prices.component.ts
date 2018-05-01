@@ -50,7 +50,7 @@ export class PricesComponent {
     autoEdit() {
         this.route.params.subscribe(params => {
             let pricePackageId = params['pricePackageId'];
-            let item = this.items.data.find( e => e.pricePackageId == pricePackageId);
+            let item = this.items.data.find(e => e.pricePackageId == pricePackageId);
             if (item) {
                 this.edit(item);
             }
@@ -61,7 +61,7 @@ export class PricesComponent {
         // създаване или редактиране?
         let create = false;
         if (!item) {
-            item = { numbersMonoInPackage: null, priceMonoPackage: null, priceMonoCopyOverPackage: null, pricePackageId: null};
+            item = { numbersMonoInPackage: null, priceMonoPackage: null, priceMonoCopyOverPackage: null, pricePackageId: null };
             create = true;
         }
 
@@ -80,12 +80,12 @@ export class PricesComponent {
                 if (result.create) {
                     this.api.createPrice(result.item).subscribe(
                         res => this.ngOnInit(), // презареждане на таблицата
-                        err => this.snackBar.open(`Грешка при създаване на пакетна цена!`)
+                        err => this.err(`Грешка при създаване на пакетна цена!`)
                     );
                 } else {
                     this.api.updatePrice(result.item.pricePackageId, result.item).subscribe(
                         res => this.ngOnInit(), // презареждане на таблицата
-                        err => this.snackBar.open(`Грешка при обновяване на избраната пакетна цена!`)
+                        err => this.err(`Грешка при обновяване на избраната пакетна цена!`)
                     );
                 }
             }
@@ -101,9 +101,16 @@ export class PricesComponent {
             if (result) {
                 this.api.deletePrice(item.pricePackageId).subscribe(
                     res => this.ngOnInit(), // reload the data
-                    err => this.snackBar.open(`Грешка при изтриване на избраната пакетна цена!`)
+                    err => this.err(`Грешка при изтриване на избраната пакетна цена!`)
                 );
             }
+        });
+    }
+
+
+    private err(message: string) {
+        this.snackBar.open(message, '', {
+            duration: 3000
         });
     }
 }
