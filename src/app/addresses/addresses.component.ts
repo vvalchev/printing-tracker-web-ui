@@ -51,7 +51,7 @@ export class AddressesComponent {
         // създаване или редактиране?
         let create = false;
         if (!item) {
-            item = { };
+            item = {};
             create = true;
         }
 
@@ -71,12 +71,12 @@ export class AddressesComponent {
                     result.item.customerUic = this.customerUic;
                     this.api.createAddresse(result.item).subscribe(
                         res => this.ngOnInit(), // презареждане на таблицата
-                        err => this.snackBar.open(`Грешка при създаване на нов адрес!`)
+                        err => this.err(`Грешка при създаване на нов адрес!`)
                     );
                 } else {
                     this.api.updateAddress(result.item.addressId, result.item).subscribe(
                         res => this.ngOnInit(), // презареждане на таблицата
-                        err => this.snackBar.open(`Грешка при обновяване на адрес "${item.streetAddress}"!`)
+                        err => this.err(`Грешка при обновяване на адрес "${item.streetAddress}"!`)
                     );
                 }
             }
@@ -92,9 +92,15 @@ export class AddressesComponent {
             if (result) {
                 this.api.deleteAddress(item.addressId).subscribe(
                     res => this.ngOnInit(), // презареждане на таблицата
-                    err => this.snackBar.open(`Грешка при изтриване на адрес "${item.streetAddress}"!`)
+                    err => this.err(`Грешка при изтриване на адрес "${item.streetAddress}"!`)
                 );
             }
+        });
+    }
+
+    private err(message: string) {
+        this.snackBar.open(message, '', {
+            duration: 3000
         });
     }
 }

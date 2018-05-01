@@ -64,7 +64,7 @@ export class CountersComponent {
             if (result) {
                 this.api.createCounterReport(result).subscribe(
                     res => this.ngOnInit(), // презареждане на таблицата
-                    err => this.snackBar.open(`Грешка при създаване на нов адрес!`)
+                    err => this.snackBar.open(`Грешка при създаване на нов адрес!`, '', { duration: 3000 })
                 );
             }
         });

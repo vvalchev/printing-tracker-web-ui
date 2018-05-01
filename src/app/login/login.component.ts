@@ -45,8 +45,9 @@ export class LoginComponent {
                 localStorage.setItem('token', res.idToken);
                 this.app.setToken(res.idToken);
                 this.router.navigate(['/']);
-            }
-        );
+            },
+            err => this.err('Грешка при вход! Проверете данните, които сте въвели и опитайте отново!')
+            );
     }
 
     register() {
@@ -56,15 +57,21 @@ export class LoginComponent {
             password: this.passwordR1,
             passwordConfirmation: this.passwordR2
         }).subscribe(
-            res => this.snackBar.open('Вашият потребител е създаден успешно. Отворете "Вход" и влезте в системата!'),
-            err => this.snackBar.open('Грешка при регистрация! Проверете данните, които сте въвели и опитайте отново!')
-        );
+            res => this.err('Вашият потребител е създаден успешно. Отворете "Вход" и влезте в системата!'),
+            err => this.err('Грешка при регистрация! Проверете данните, които сте въвели и опитайте отново!')
+            );
+    }
+
+    private err(message: string) {
+        this.snackBar.open(message, '', {
+            duration: 3000
+        });
     }
 
 }
 
 export class SamePasswordErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    return form ? form.value.password !== form.value.passwordConfirmation : false;
-  }
+    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+        return form ? form.value.password !== form.value.passwordConfirmation : false;
+    }
 }

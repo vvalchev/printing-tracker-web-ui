@@ -51,7 +51,7 @@ export class InvoicesComponent {
     markAsPaid(invoice: s.Invoice) {
         this.api.markAsPaid(invoice.invoiceId).subscribe(
             res => this.ngOnInit(), // презареждане на таблицата
-            err => this.snackBar.open(`Грешка при маркиране на фактурата като платена!`)
+            err => this.snackBar.open(`Грешка при маркиране на фактурата като платена!`, '', { duration: 3000 })
         )
     }
 }
