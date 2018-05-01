@@ -49,9 +49,9 @@ $candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
     }
 }
 
-.demo-root * {
-    opacity: 0.95;
-}
+// .demo-root * {
+//     opacity: 0.95;
+// }
 .demo-root {
     background-image: url("https://source.unsplash.com/random/1024x768");
     background-size: 130%;
